@@ -23,8 +23,6 @@ int snr2=0;
 int snr3=0;
 float mmv=0;
 
-
-
 void setup() {
   // put your setup code here, to run once:
 pinMode(pin1,OUTPUT);
@@ -34,16 +32,10 @@ pinMode(pin4,OUTPUT);
 Serial.begin(9600);
 lcd.begin(16, 2);
 lcd.print("UITM P.G 2018!!");
-
-
-
-
-
-
 }
 
+//Main code
 void loop() {
-  // put your main code here, to run repeatedly:
 
 snr1=analogRead(btn1);
 snr2=analogRead(btn3);
@@ -75,51 +67,37 @@ lcd.print(mmv);
 lcd.print("mm");
   }
 
-
-
 if (Serial.available() > 0) {
                 // read the incoming byte:
                 rev = Serial.parseInt();
-                
-                nstep=rev*512;//jumlah step lepas calculation
-                
-               
-               
+                nstep=rev*512;//No. of steps per revolution       
                 rev2=1;
-
-           
-                // say what you got:
-            
         }
 
 if(rev2==1){
 
-if(nstep>0){
-if(c<8)
-{
- stepc++;
- c++;
- }
-  else{
-    c=1;
-    stepc=1;
+  if(nstep>0){
+    if(c<8)
+    {
+     stepc++;
+     c++;
      }
-nstep--;  
-tstep--;
-}
+      else{
+        c=1;
+        stepc=1;
+         }
+  nstep--;  
+  tstep--;
+  }
  
 
-else if(nstep==0)
-{
-    stepc=9;
-  
- i=0;
- c=4;
- rev2=0;
-  
+  else if(nstep==0)
+  {
+      stepc=9;
 
-
-  
+   i=0;
+   c=4;
+   rev2=0; 
 }
 
 else {
@@ -136,8 +114,8 @@ nstep++;
 tstep++;  
 }
 
- lcd.clear();
- lcd.setCursor(0, 0);
+lcd.clear();
+lcd.setCursor(0, 0);
 lcd.print("step: ");
 lcd.print(nstep);
 lcd.setCursor(0, 1);
@@ -153,8 +131,7 @@ Serial.print(snr1);
 
 }
 
-
-
+//Condition for stepc
 switch(stepc){
 
 case 1:
